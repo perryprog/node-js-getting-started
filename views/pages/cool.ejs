@@ -8,7 +8,7 @@
 <body>
 <div class="jumbotron text-center">
     <div class="container">
-        <h3><span id="emotes-here"><%= emote %></span></h3>
+        <h3><span id="emotes-here" data-clipboard-text="" tooltip="Click to copy!">Hold on a sec!</span></h3>
         <button class="btn btn-large btn-primary" onclick="emoteReload()">Do me a reload!</button>
     </div>
 </div>
@@ -16,10 +16,13 @@
 <script>
     var emotes = '<%= emotes.join("π"); %> '; // because so many weird chars in this
     var emotesarr = emotes.split("π"); // this is a bad idea isn't it
-    
+    emoteReload();
+
     function emoteReload() {
         var reloadMe = document.getElementById("emotes-here");
-        reloadMe.innerText = htmlDecode(emotesarr[Math.floor(Math.random() * emotesarr.length)]);
+        var textToSet = htmlDecode(emotesarr[Math.floor(Math.random() * emotesarr.length)]);
+        reloadMe.innerText = textToSet
+        reloadMe.setAttribute("data-clipboard-text", textToSet)
     }
 
     function htmlDecode(input){
@@ -28,6 +31,8 @@
         // handle case of empty input
         return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     }
+
+    new Clipboard("#emotes-here");
 </script>
 </body>
 
