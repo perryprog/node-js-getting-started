@@ -11,7 +11,7 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "cool-ascii-faces": "1.3.4",
+    "cool-ascii-faces": "github:perryprog/cool-ascii-faces",
     "ejs": "^2.5.7",
     "express": "^4.15.4"
   },

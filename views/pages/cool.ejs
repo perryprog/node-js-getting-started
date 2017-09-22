@@ -6,11 +6,29 @@
 </head>
 
 <body>
+<div class="jumbotron text-center">
+    <div class="container">
+        <h3><span id="emotes-here"><%= emote %></span></h3>
+        <button class="btn btn-large btn-primary" onclick="emoteReload()">Do me a reload!</button>
+    </div>
+</div>
 
-    <p>Cool emoticon: <%= emote %></p>
+<script>
+    var emotes = '<%= emotes.join("π"); %> '; // because so many weird chars in this
+    var emotesarr = emotes.split("π"); // this is a bad idea isn't it
+    
+    function emoteReload() {
+        var reloadMe = document.getElementById("emotes-here");
+        reloadMe.innerText = htmlDecode(emotesarr[Math.floor(Math.random() * emotesarr.length)]);
+    }
 
-
-    <button onclick="location.reload()">Do me a reload</button>
+    function htmlDecode(input){
+        var e = document.createElement('div');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+</script>
 </body>
 
 </html>
